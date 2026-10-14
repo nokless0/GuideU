@@ -1,0 +1,301 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AC0000000000000000000014 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0000000000000000000013 /* ContentView.swift */; };
+		AC0000000000000000000016 /* GuideUApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0000000000000000000015 /* GuideUApp.swift */; };
+		AC0000000000000000000018 /* Challenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0000000000000000000017 /* Challenge.swift */; };
+		AC000000000000000000001A /* ProgressStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0000000000000000000019 /* ProgressStore.swift */; };
+		AC000000000000000000001C /* GuideUTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC000000000000000000001B /* GuideUTheme.swift */; };
+		AC000000000000000000001E /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC000000000000000000001D /* OnboardingView.swift */; };
+		AC0000000000000000000020 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC000000000000000000001F /* DashboardView.swift */; };
+		AC0000000000000000000022 /* ChallengesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0000000000000000000021 /* ChallengesView.swift */; };
+		AC0000000000000000000024 /* ProgressScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0000000000000000000023 /* ProgressScreen.swift */; };
+		AC0000000000000000000026 /* SettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0000000000000000000025 /* SettingsScreen.swift */; };
+		AC0000000000000000000028 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC0000000000000000000027 /* Assets.xcassets */; };
+		AC000000000000000000002A /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = AC0000000000000000000029 /* PrivacyInfo.xcprivacy */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		AC0000000000000000000009 /* GuideU.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GuideU.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC0000000000000000000013 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		AC0000000000000000000015 /* GuideUApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideUApp.swift; sourceTree = "<group>"; };
+		AC0000000000000000000017 /* Challenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Challenge.swift; sourceTree = "<group>"; };
+		AC0000000000000000000019 /* ProgressStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressStore.swift; sourceTree = "<group>"; };
+		AC000000000000000000001B /* GuideUTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideUTheme.swift; sourceTree = "<group>"; };
+		AC000000000000000000001D /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		AC000000000000000000001F /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
+		AC0000000000000000000021 /* ChallengesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengesView.swift; sourceTree = "<group>"; };
+		AC0000000000000000000023 /* ProgressScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressScreen.swift; sourceTree = "<group>"; };
+		AC0000000000000000000025 /* SettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreen.swift; sourceTree = "<group>"; };
+		AC0000000000000000000027 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AC0000000000000000000029 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		AC000000000000000000002B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AC000000000000000000000C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AC0000000000000000000002 = {
+			isa = PBXGroup;
+			children = (
+				AC0000000000000000000003 /* GuideU */,
+				AC000000000000000000002B /* README.md */,
+				AC0000000000000000000007 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AC0000000000000000000003 /* GuideU */ = {
+			isa = PBXGroup;
+			children = (
+				AC0000000000000000000013 /* ContentView.swift */,
+				AC0000000000000000000015 /* GuideUApp.swift */,
+				AC0000000000000000000027 /* Assets.xcassets */,
+				AC0000000000000000000029 /* PrivacyInfo.xcprivacy */,
+				AC0000000000000000000004 /* Models */,
+				AC0000000000000000000006 /* Design */,
+				AC0000000000000000000005 /* Views */,
+			);
+			path = GuideU;
+			sourceTree = "<group>";
+		};
+		AC0000000000000000000004 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				AC0000000000000000000017 /* Challenge.swift */,
+				AC0000000000000000000019 /* ProgressStore.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		AC0000000000000000000006 /* Design */ = {
+			isa = PBXGroup;
+			children = (
+				AC000000000000000000001B /* GuideUTheme.swift */,
+			);
+			path = Design;
+			sourceTree = "<group>";
+		};
+		AC0000000000000000000005 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				AC000000000000000000001D /* OnboardingView.swift */,
+				AC000000000000000000001F /* DashboardView.swift */,
+				AC0000000000000000000021 /* ChallengesView.swift */,
+				AC0000000000000000000023 /* ProgressScreen.swift */,
+				AC0000000000000000000025 /* SettingsScreen.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		AC0000000000000000000007 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AC0000000000000000000009 /* GuideU.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AC0000000000000000000008 /* GuideU */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AC0000000000000000000012 /* Build configuration list for PBXNativeTarget "GuideU" */;
+			buildPhases = (
+				AC000000000000000000000A /* Sources */,
+				AC000000000000000000000C /* Frameworks */,
+				AC000000000000000000000B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GuideU;
+			productName = GuideU;
+			productReference = AC0000000000000000000009 /* GuideU.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AC0000000000000000000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					AC0000000000000000000008 = {
+						CreatedOnToolsVersion = 16.0;
+					};
+				};
+			};
+			buildConfigurationList = AC0000000000000000000011 /* Build configuration list for PBXProject "GuideU" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = es;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				es,
+				en,
+				Base,
+			);
+			mainGroup = AC0000000000000000000002;
+			productRefGroup = AC0000000000000000000007 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AC0000000000000000000008 /* GuideU */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AC000000000000000000000B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AC0000000000000000000028 /* Assets.xcassets in Resources */,
+				AC000000000000000000002A /* PrivacyInfo.xcprivacy in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AC000000000000000000000A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AC0000000000000000000014 /* ContentView.swift in Sources */,
+				AC0000000000000000000016 /* GuideUApp.swift in Sources */,
+				AC0000000000000000000018 /* Challenge.swift in Sources */,
+				AC000000000000000000001A /* ProgressStore.swift in Sources */,
+				AC000000000000000000001C /* GuideUTheme.swift in Sources */,
+				AC000000000000000000001E /* OnboardingView.swift in Sources */,
+				AC0000000000000000000020 /* DashboardView.swift in Sources */,
+				AC0000000000000000000022 /* ChallengesView.swift in Sources */,
+				AC0000000000000000000024 /* ProgressScreen.swift in Sources */,
+				AC0000000000000000000026 /* SettingsScreen.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		AC000000000000000000000D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		AC000000000000000000000E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		AC000000000000000000000F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = GuideU;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nokless0.guideu;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		AC0000000000000000000010 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = GuideU;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nokless0.guideu;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AC0000000000000000000011 /* Build configuration list for PBXProject "GuideU" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AC000000000000000000000D /* Debug */,
+				AC000000000000000000000E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AC0000000000000000000012 /* Build configuration list for PBXNativeTarget "GuideU" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AC000000000000000000000F /* Debug */,
+				AC0000000000000000000010 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AC0000000000000000000001 /* Project object */;
+}

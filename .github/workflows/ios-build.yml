@@ -1,0 +1,25 @@
+name: Compilar GuideU para iOS
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - name: Obtener codigo
+        uses: actions/checkout@v4
+      - name: Verificar Xcode
+        run: xcodebuild -version
+      - name: Compilar para simulador
+        run: |
+          xcodebuild \
+            -project GuideU.xcodeproj \
+            -scheme GuideU \
+            -configuration Debug \
+            -sdk iphonesimulator \
+            -destination 'generic/platform=iOS Simulator' \
+            CODE_SIGNING_ALLOWED=NO \
+            build
