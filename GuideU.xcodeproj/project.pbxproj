@@ -21,6 +21,9 @@
 		AC000000000000000000002A /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = AC0000000000000000000029 /* PrivacyInfo.xcprivacy */; };
 		BE0000000000000000000002 /* MiniGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0000000000000000000001 /* MiniGame.swift */; };
 		BE0000000000000000000004 /* GamesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0000000000000000000003 /* GamesView.swift */; };
+		CD0000000000000000000002 /* TownScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0000000000000000000001 /* TownScene.swift */; };
+		CD0000000000000000000004 /* WorldAdventureModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0000000000000000000003 /* WorldAdventureModel.swift */; };
+		CD0000000000000000000006 /* WorldAdventureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0000000000000000000005 /* WorldAdventureView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +43,9 @@
 		AC000000000000000000002B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		BE0000000000000000000001 /* MiniGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniGame.swift; sourceTree = "<group>"; };
 		BE0000000000000000000003 /* GamesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesView.swift; sourceTree = "<group>"; };
+		CD0000000000000000000001 /* TownScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TownScene.swift; sourceTree = "<group>"; };
+		CD0000000000000000000003 /* WorldAdventureModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldAdventureModel.swift; sourceTree = "<group>"; };
+		CD0000000000000000000005 /* WorldAdventureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldAdventureView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +78,7 @@
 				AC0000000000000000000004 /* Models */,
 				AC0000000000000000000006 /* Design */,
 				AC0000000000000000000005 /* Views */,
+				CD0000000000000000000007 /* World */,
 			);
 			path = GuideU;
 			sourceTree = "<group>";
@@ -113,6 +120,16 @@
 				AC0000000000000000000009 /* GuideU.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		CD0000000000000000000007 /* World */ = {
+			isa = PBXGroup;
+			children = (
+				CD0000000000000000000001 /* TownScene.swift */,
+				CD0000000000000000000003 /* WorldAdventureModel.swift */,
+				CD0000000000000000000005 /* WorldAdventureView.swift */,
+			);
+			path = World;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -185,6 +202,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD0000000000000000000002 /* TownScene.swift in Sources */,
+				CD0000000000000000000004 /* WorldAdventureModel.swift in Sources */,
+				CD0000000000000000000006 /* WorldAdventureView.swift in Sources */,
 				BE0000000000000000000002 /* MiniGame.swift in Sources */,
 				BE0000000000000000000004 /* GamesView.swift in Sources */,
 				AC0000000000000000000014 /* ContentView.swift in Sources */,
