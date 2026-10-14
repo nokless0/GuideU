@@ -19,6 +19,8 @@
 		AC0000000000000000000026 /* SettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0000000000000000000025 /* SettingsScreen.swift */; };
 		AC0000000000000000000028 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC0000000000000000000027 /* Assets.xcassets */; };
 		AC000000000000000000002A /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = AC0000000000000000000029 /* PrivacyInfo.xcprivacy */; };
+		BE0000000000000000000002 /* MiniGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0000000000000000000001 /* MiniGame.swift */; };
+		BE0000000000000000000004 /* GamesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0000000000000000000003 /* GamesView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,8 @@
 		AC0000000000000000000027 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AC0000000000000000000029 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		AC000000000000000000002B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		BE0000000000000000000001 /* MiniGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniGame.swift; sourceTree = "<group>"; };
+		BE0000000000000000000003 /* GamesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +79,7 @@
 		AC0000000000000000000004 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				BE0000000000000000000001 /* MiniGame.swift */,
 				AC0000000000000000000017 /* Challenge.swift */,
 				AC0000000000000000000019 /* ProgressStore.swift */,
 			);
@@ -92,6 +97,7 @@
 		AC0000000000000000000005 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				BE0000000000000000000003 /* GamesView.swift */,
 				AC000000000000000000001D /* OnboardingView.swift */,
 				AC000000000000000000001F /* DashboardView.swift */,
 				AC0000000000000000000021 /* ChallengesView.swift */,
@@ -179,6 +185,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE0000000000000000000002 /* MiniGame.swift in Sources */,
+				BE0000000000000000000004 /* GamesView.swift in Sources */,
 				AC0000000000000000000014 /* ContentView.swift in Sources */,
 				AC0000000000000000000016 /* GuideUApp.swift in Sources */,
 				AC0000000000000000000018 /* Challenge.swift in Sources */,

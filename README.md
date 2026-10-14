@@ -1,44 +1,57 @@
-# GuideU · SwiftUI
+# GuideU 2.0 — aprende, explora y juega
 
-**GuideU** es un prototipo educativo de iOS para practicar habilidades de comunicación, autonomía y situaciones cotidianas en un entorno amable y accesible. Está pensado como apoyo para niños y adolescentes de aproximadamente 10 a 15 años, incluyendo usuarios autistas.
+GuideU es un **prototipo educativo de iOS y iPadOS**, escrito en SwiftUI, con actividades para practicar comunicación, autonomía y situaciones cotidianas. Está pensado especialmente para niños y adolescentes (aprox. 10–15 años), incluidas personas autistas. No es una herramienta diagnóstica ni un tratamiento.
 
-## Funciones
+## Qué incluye la versión 2.0
 
-- Introducción de cuatro pantallas (solo en el primer inicio; puede repetirse desde Ajustes).
-- Pantallas Inicio, Retos, Progreso y Ajustes, con navegación inferior.
-- **9 retos interactivos** repartidos entre Escuela, Familia y Comunidad.
-- Retroalimentación inmediata y varias respuestas válidas cuando corresponde.
-- Pistas opcionales y sugerencias para practicar fuera de la aplicación.
-- Una estrella por cada reto diferente completado; se pueden repetir los retos sin duplicar estrellas.
-- Guardado local automático de progreso y preferencias usando UserDefaults.
-- Texto ampliado opcional, Dynamic Type, VoiceOver, símbolos acompañados de texto y botones grandes.
-- Sin cuentas, sin servicios externos, sin permisos especiales y sin necesidad de internet.
+- Nueva identidad visual juvenil con **Lumi**, una pequeña estrella acompañante dibujada con SF Symbols, tarjetas de esquinas redondeadas, diseño adaptable a iPhone y iPad.
+- 4 pantallas introductorias que pueden volver a consultarse.
+- **9 retos sociales** de escuela, familia y comunidad, con comentarios amables y más de una respuesta útil cuando corresponde.
+- **6 minijuegos nuevos** de dos mecánicas accesibles:
+  - **Ordena los pasos:** construye secuencias al tocar tarjetas; puedes deshacer pasos y pedir una pista.
+  - **Relaciona las ideas:** conecta una situación con una estrategia adecuada, paso a paso.
+- Colección de **15 estrellas posibles** (una por actividad diferente) y registro de actividades exploradas.
+- No hay cronómetros, rachas, penalizaciones, competencia, publicidad ni reproducción automática de sonidos.
+- Progreso y preferencias guardados únicamente en el dispositivo, conservando los retos completados en la versión anterior.
+- Preferencias para tamaño de texto, pistas y **diseño tranquilo**; controles grandes, etiquetas con iconos y textos, soporte de VoiceOver y Dynamic Type.
+- Sin cuentas, paquetes externos o conexión a internet.
 
-Las actividades no exigen contacto visual ni contacto físico; se pueden expresar límites, pedir pausas y usar comunicación no verbal. **No es una herramienta diagnóstica ni sustituye apoyo profesional.**
+Las situaciones se diseñaron para respetar diferentes maneras de comunicarse: no se exige mirar a los ojos, hablar en voz alta o aceptar contacto físico. Hay maneras alternativas de pedir ayuda, expresar límites y descansar.
 
-## Cómo ejecutar en Xcode
+## Cómo abrirlo
 
 1. Clona el repositorio:
    ```bash
    git clone https://github.com/nokless0/GuideU.git
    ```
-2. Abre **GuideU.xcodeproj** (el archivo está en la raíz del repositorio).
-3. Selecciona el esquema **GuideU** y un simulador de iPhone.
-4. Pulsa **⌘R** para compilar y ejecutar.
+2. Abre **GuideU.xcodeproj** con Xcode.
+3. Elige el esquema **GuideU**, selecciona un simulador de iPhone o iPad y pulsa **⌘R**.
+4. Para instalarlo en un dispositivo físico, selecciona el equipo de firma en **Signing & Capabilities**.
 
-**Requisitos:** macOS con Xcode que soporte SwiftUI e iOS 17 o posterior. El proyecto usa Swift 5 language mode y no requiere paquetes de terceros.
+**Requisitos:** iOS 17 o posterior, y una versión reciente de Xcode. Lenguaje Swift 5; sin dependencias externas.
 
-Para probar en un iPhone físico, selecciona tu equipo de desarrollo en **Target GuideU → Signing & Capabilities** y configura la firma.
+Si ya clonaste GuideU, usa `git pull` desde la rama `main` o **Integrate → Pull** en Xcode para obtener la actualización.
+
+## Comprobaciones sugeridas
+
+1. Recorrer la introducción; volver a abrirla desde Ajustes.
+2. Terminar un reto nuevo y observar su estrella en Logros.
+3. Ir a Juegos, completar una secuencia y una asociación.
+4. Volver a jugar: no deben duplicarse las estrellas.
+5. Cerrar y abrir la aplicación y comprobar que las estrellas persistan.
+6. Activar Texto ampliado y Diseño tranquilo; revisar en iPhone e iPad.
+7. Probar VoiceOver y texto grande desde Ajustes de iOS.
 
 ## Estructura
 
 ```text
 GuideU.xcodeproj/
 GuideU/
-  GuideUApp.swift
   ContentView.swift
+  GuideUApp.swift
   Models/
     Challenge.swift
+    MiniGame.swift
     ProgressStore.swift
   Design/
     GuideUTheme.swift
@@ -46,24 +59,17 @@ GuideU/
     OnboardingView.swift
     DashboardView.swift
     ChallengesView.swift
+    GamesView.swift
     ProgressScreen.swift
     SettingsScreen.swift
   Assets.xcassets/
   PrivacyInfo.xcprivacy
 ```
 
-## Probar el prototipo
+## Decisiones de diseño
 
-1. La primera vez, avanza las cuatro páginas de introducción.
-2. En Inicio entra en «Un reto para ti» o filtra desde Retos.
-3. Selecciona una respuesta, lee la explicación y, cuando corresponda, pulsa «Completar reto».
-4. Consulta tu estrella en Progreso y cierra y abre la app para comprobar que se conserve.
-5. En Ajustes cambia el texto, activa o desactiva las pistas, repite la introducción o restablece el progreso.
+- Las recomendaciones de [Apple sobre accesibilidad](https://developer.apple.com/design/human-interface-guidelines/accessibility) fundamentan el uso de Dynamic Type, VoiceOver, legibilidad, apoyo no basado solo en color y el respeto a Reducir movimiento.
+- La [iniciativa RITEC de UNICEF](https://www.unicef.org/innovation/responsible-innovation-technology-children-ritec) destaca la autonomía, la elección y el bienestar en el juego digital. Por ello evitamos clasificaciones públicas y recompensas por tiempo o por rachas.
+- Los [patrones de accesibilidad cognitiva de W3C](https://www.w3.org/WAI/WCAG2/supplemental/patterns/o1p05-clear-controls/) recomiendan controles claros, instrucciones breves y una navegación consistente.
 
-## Privacidad
-
-Toda la información guardada son identificadores de retos completados y preferencias de la app, almacenados localmente. No hay analítica, publicidad, cuentas ni transmisión de información personal. La app puede usarse sin conexión.
-
-## Estado
-
-Versión **1.0 de prototipo educativo**. El código y el proyecto Xcode están listos para que se compile y pruebe desde un Mac; deben validarse en el simulador y con usuarios antes de considerarse una versión de producción.
+**Importante:** sigue siendo un prototipo educativo. Antes de un uso real sostenido, conviene validarlo con personas autistas de distintas edades, familias y especialistas, sin asumir que existe una sola preferencia sensorial o de comunicación.
