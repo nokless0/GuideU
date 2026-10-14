@@ -10,9 +10,7 @@ struct ContentView: View {
             if finishedOnboarding {
                 MainTabs(progress: progress)
             } else {
-                OnboardingView {
-                    finishedOnboarding = true
-                }
+                OnboardingView { finishedOnboarding = true }
             }
         }
         .tint(GuideUTheme.accent)
@@ -49,9 +47,14 @@ private struct MainTabs: View {
             .tabItem { Label("Retos", systemImage: "rectangle.stack.fill") }
 
             NavigationStack {
+                GamesHubView(progress: progress)
+            }
+            .tabItem { Label("Juegos", systemImage: "puzzlepiece.fill") }
+
+            NavigationStack {
                 ProgressScreen(progress: progress)
             }
-            .tabItem { Label("Progreso", systemImage: "star.circle.fill") }
+            .tabItem { Label("Logros", systemImage: "star.circle.fill") }
 
             NavigationStack {
                 SettingsScreen(progress: progress)

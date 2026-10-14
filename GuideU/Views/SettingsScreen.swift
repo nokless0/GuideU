@@ -5,6 +5,7 @@ struct SettingsScreen: View {
 
     @AppStorage("GuideU.largeText") private var largeText = false
     @AppStorage("GuideU.showTips") private var showTips = true
+    @AppStorage("GuideU.quietMode") private var quietMode = false
     @AppStorage("GuideU.finishedOnboarding") private var finishedOnboarding = true
     @State private var confirmReset = false
 
@@ -19,18 +20,29 @@ struct SettingsScreen: View {
                 Toggle(isOn: $showTips) {
                     Label("Mostrar pistas", systemImage: "lightbulb.fill")
                 }
-                .accessibilityHint("Muestra una sugerencia en cada reto")
+                .accessibilityHint("Muestra sugerencias durante los retos")
             } header: {
-                Text("Preferencias")
+                Text("Lectura y ayuda")
             } footer: {
-                Text("GuideU también respeta el tamaño de texto y VoiceOver de iOS.")
+                Text("La app también respeta el tamaño de letra y VoiceOver configurados en iOS.")
+            }
+
+            Section {
+                Toggle(isOn: $quietMode) {
+                    Label("Diseño tranquilo", systemImage: "leaf")
+                }
+                .accessibilityHint("Reduce los adornos y simplifica el fondo de las tarjetas")
+            } header: {
+                Text("Comodidad visual")
+            } footer: {
+                Text("Los juegos no tienen música automática, cronómetros ni destellos. Se respeta Reducir movimiento de iOS.")
             }
 
             Section("Volver a empezar") {
                 Button {
                     finishedOnboarding = false
                 } label: {
-                    Label("Ver introducción otra vez", systemImage: "arrow.counterclockwise")
+                    Label("Ver la introducción otra vez", systemImage: "arrow.counterclockwise")
                 }
 
                 Button(role: .destructive) {
@@ -48,14 +60,15 @@ struct SettingsScreen: View {
                     }
                     Button("Cancelar", role: .cancel) {}
                 } message: {
-                    Text("Los retos seguirán disponibles. Esta acción no se puede deshacer.")
+                    Text("Los retos y juegos seguirán disponibles. Esta acción no se puede deshacer.")
                 }
             }
 
             Section("Acerca de GuideU") {
-                LabeledContent("Versión", value: "1.0")
-                Text("Prototipo educativo para practicar habilidades de comunicación y autonomía. No sustituye el acompañamiento de profesionales o familiares.")
-                Text("Los avances y preferencias se guardan solo en este dispositivo. La app no requiere una cuenta ni recopila datos personales.")
+                LabeledContent("Versión", value: "2.0")
+                Text("Lumi te acompaña a explorar situaciones cotidianas. Puedes practicar sin competir ni sentir presión.")
+                Text("Prototipo educativo; no reemplaza el acompañamiento de familiares o profesionales.")
+                Text("El progreso se guarda únicamente en este dispositivo. No necesitas cuenta ni conexión a internet.")
             }
         }
         .navigationTitle("Ajustes")

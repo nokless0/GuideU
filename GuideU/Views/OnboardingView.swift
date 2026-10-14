@@ -13,36 +13,35 @@ struct OnboardingView: View {
 
     private let pages: [IntroPage] = [
         IntroPage(
-            symbol: "hand.wave.fill",
-            title: "¡Hola! Soy GuideU",
-            description: "Aquí puedes practicar situaciones cotidianas a tu propio ritmo.",
-            detail: "No hay prisa: cada pequeño paso cuenta."
+            symbol: "sparkles",
+            title: "¡Hola! Soy Lumi",
+            description: "Te doy la bienvenida a GuideU, un espacio para aprender a tu ritmo.",
+            detail: "Aquí puedes explorar, jugar y hacer pausas cuando quieras."
         ),
         IntroPage(
             symbol: "rectangle.stack.fill",
-            title: "Explora los retos",
-            description: "Elige situaciones de la escuela, la familia y otros lugares.",
-            detail: "Puedes repetir cualquier actividad cuando quieras."
+            title: "Descubre historias",
+            description: "Practica situaciones de la escuela, la familia y otros lugares.",
+            detail: "Hay diferentes maneras de comunicarse. Tú eliges."
         ),
         IntroPage(
-            symbol: "text.bubble.fill",
-            title: "Elige tu respuesta",
-            description: "Lee una historia, piensa qué harías y recibe una explicación amable.",
-            detail: "A veces hay más de una buena respuesta."
+            symbol: "puzzlepiece.fill",
+            title: "Juguemos juntos",
+            description: "Ordena pasos y relaciona ideas para resolver misiones divertidas.",
+            detail: "Sin reloj ni penalizaciones. Puedes intentarlo de nuevo."
         ),
         IntroPage(
             symbol: "star.circle.fill",
-            title: "Celebra tus avances",
-            description: "Consigue una estrella por cada reto diferente que completes.",
-            detail: "Puedes cambiar el tamaño del texto en Ajustes."
+            title: "Colecciona estrellas",
+            description: "Descubre una estrella por cada actividad nueva que completes.",
+            detail: "Puedes repetir cualquier actividad y cambiar el diseño en Ajustes."
         )
     ]
 
     var body: some View {
         VStack(spacing: 12) {
             HStack {
-                Image(systemName: "sparkles")
-                    .foregroundStyle(GuideUTheme.accent)
+                GuideUMascot(size: 34)
                 Text("GuideU")
                     .font(.title2.bold())
                 Spacer()
@@ -50,37 +49,42 @@ struct OnboardingView: View {
                     .accessibilityHint("Ir directamente al inicio")
             }
             .padding(.horizontal, 24)
-            .padding(.top, 20)
+            .padding(.top, 18)
 
             TabView(selection: $page) {
                 ForEach(pages.indices, id: \.self) { index in
                     ScrollView {
                         VStack(spacing: 22) {
-                            Spacer(minLength: 20)
+                            Spacer(minLength: 14)
                             Image(systemName: pages[index].symbol)
-                                .font(.system(size: 76, weight: .medium))
+                                .font(.system(size: 72, weight: .medium))
                                 .foregroundStyle(GuideUTheme.accent)
+                                .frame(width: 142, height: 142)
+                                .background(GuideUTheme.accent.opacity(0.10), in: Circle())
                                 .accessibilityHidden(true)
+
                             Text(pages[index].title)
                                 .font(.largeTitle.bold())
                                 .multilineTextAlignment(.center)
                                 .accessibilityAddTraits(.isHeader)
+
                             Text(pages[index].description)
                                 .font(.title3)
                                 .multilineTextAlignment(.center)
+
                             GuideUCard {
-                                Text(pages[index].detail)
+                                Label(pages[index].detail, systemImage: "heart.fill")
                                     .font(.body)
-                                    .frame(maxWidth: .infinity)
+                                    .frame(maxWidth: .infinity, alignment: .center)
                                     .multilineTextAlignment(.center)
                             }
                             Spacer(minLength: 20)
                         }
-                        .padding(.horizontal, 28)
+                        .frame(maxWidth: 650)
                         .frame(maxWidth: .infinity)
+                        .padding(.horizontal, 24)
                     }
                     .tag(index)
-                    .accessibilityElement(children: .contain)
                 }
             }
             .tabViewStyle(.page(indexDisplayMode: .always))
@@ -92,6 +96,7 @@ struct OnboardingView: View {
                         .buttonStyle(.bordered)
                         .frame(minHeight: 54)
                 }
+
                 Button {
                     if page == pages.count - 1 {
                         onFinish()
@@ -100,15 +105,15 @@ struct OnboardingView: View {
                     }
                 } label: {
                     PrimaryActionLabel(
-                        title: page == pages.count - 1 ? "Empezar" : "Siguiente",
+                        title: page == pages.count - 1 ? "¡Vamos!" : "Siguiente",
                         symbol: "arrow.right"
                     )
                 }
                 .buttonStyle(.borderedProminent)
             }
             .padding(.horizontal, 24)
-            .padding(.bottom, 20)
+            .padding(.bottom, 18)
         }
-        .background(GuideUTheme.background)
+        .background(GuideUTheme.background.ignoresSafeArea())
     }
 }

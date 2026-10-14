@@ -3,6 +3,7 @@ import SwiftUI
 struct ChallengesListView: View {
     @ObservedObject var progress: ProgressStore
     @State private var selectedCategory: ChallengeCategory?
+    private let columns = [GridItem(.adaptive(minimum: 260), spacing: 14)]
 
     init(progress: ProgressStore, initialCategory: ChallengeCategory? = nil) {
         self.progress = progress
@@ -10,10 +11,28 @@ struct ChallengesListView: View {
     }
 
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 16) {
-                Text("Practica cuando quieras. Puedes repetir los retos las veces que necesites.")
-                    .foregroundStyle(.secondary)
+        GuideUPage {
+            VStack(alignment: .leading, spacing: 22) {
+                GuideUHero {
+                    HStack(spacing: 16) {
+                        VStack(alignment: .leading, spacing: 10) {
+                            Text("HISTORIAS INTERACTIVAS")
+                                .font(.caption.bold())
+                                .tracking(1)
+                                .foregroundStyle(GuideUTheme.accent)
+                            Text("Mis retos")
+                                .font(.largeTitle.bold())
+                                .accessibilityAddTraits(.isHeader)
+                            Text("Descubre estrategias para situaciones reales, a tu ritmo.")
+                                .foregroundStyle(.secondary)
+                        }
+                        Spacer(minLength: 4)
+                        Image(systemName: "books.vertical.circle.fill")
+                            .font(.system(size: 50))
+                            .foregroundStyle(GuideUTheme.accent)
+                            .accessibilityHidden(true)
+                    }
+                }
 
                 Menu {
                     Button("Todas las categorías") { selectedCategory = nil }
@@ -28,45 +47,45 @@ struct ChallengesListView: View {
                 }
                 .accessibilityHint("Filtra los retos por lugar")
 
-                ForEach(ChallengeLibrary.forCategory(selectedCategory)) { challenge in
-                    NavigationLink {
-                        ChallengeDetailView(challenge: challenge, progress: progress)
-                    } label: {
-                        GuideUCard {
-                            HStack(alignment: .top, spacing: 14) {
-                                Image(systemName: challenge.symbol)
-                                    .font(.title)
-                                    .foregroundStyle(GuideUTheme.accent)
-                                    .frame(width: 40)
-                                    .accessibilityHidden(true)
-                                VStack(alignment: .leading, spacing: 8) {
-                                    Text(challenge.title)
-                                        .font(.headline)
-                                        .foregroundStyle(.primary)
-                                    CategoryPill(category: challenge.category)
-                                    if progress.isCompleted(challenge) {
-                                        Label("Completado", systemImage: "checkmark.seal.fill")
-                                            .font(.subheadline.weight(.medium))
-                                            .foregroundStyle(.green)
-                                    } else {
-                                        Text("Por practicar")
-                                            .font(.subheadline)
-                                            .foregroundStyle(.secondary)
+                LazyVGrid(columns: columns, spacing: 14) {
+                    ForEach(ChallengeLibrary.forCategory(selectedCategory)) { challenge in
+                        NavigationLink {
+                            ChallengeDetailView(challenge: challenge, progress: progress)
+                        } label: {
+                            GuideUCard {
+                                VStack(alignment: .leading, spacing: 12) {
+                                    HStack {
+                                        Image(systemName: challenge.symbol)
+                                            .font(.system(size: 27))
+                                            .foregroundStyle(GuideUTheme.accent)
+                                            .frame(width: 60, height: 60)
+                                            .background(GuideUTheme.accent.opacity(0.10),
+                                                        in: RoundedRectangle(cornerRadius: 18))
+                                            .accessibilityHidden(true)
+                                        Spacer()
+                                        if progress.isCompleted(challenge) {
+                                            Label("Listo", systemImage: "checkmark.seal.fill")
+                                                .font(.caption.bold())
+                                                .foregroundStyle(GuideUTheme.mint)
+                                        }
                                     }
+                                    CategoryPill(category: challenge.category)
+                                    Text(challenge.title)
+                                        .font(.title3.bold())
+                                        .foregroundStyle(.primary)
+                                        .multilineTextAlignment(.leading)
+                                    Label("Explorar historia", systemImage: "arrow.right")
+                                        .font(.subheadline.weight(.semibold))
+                                        .foregroundStyle(GuideUTheme.accent)
                                 }
-                                Spacer(minLength: 2)
-                                Image(systemName: "chevron.right")
-                                    .foregroundStyle(.secondary)
-                                    .accessibilityHidden(true)
+                                .frame(maxWidth: .infinity, alignment: .leading)
                             }
                         }
+                        .buttonStyle(.plain)
                     }
-                    .buttonStyle(.plain)
                 }
             }
-            .padding(20)
         }
-        .background(GuideUTheme.background)
         .navigationTitle("Retos")
     }
 }
@@ -86,7 +105,7 @@ struct ChallengeDetailView: View {
     }
 
     var body: some View {
-        ScrollView {
+        GuideUPage {
             if finished {
                 resultContent
             } else {
@@ -110,15 +129,24 @@ struct ChallengeDetailView: View {
                 }
             }
 
-            Image(systemName: challenge.symbol)
-                .font(.system(size: 56))
-                .foregroundStyle(GuideUTheme.accent)
-                .frame(maxWidth: .infinity)
-                .accessibilityHidden(true)
-
-            Text(challenge.title)
-                .font(.title.bold())
-                .accessibilityAddTraits(.isHeader)
+            GuideUHero {
+                HStack(spacing: 16) {
+                    Image(systemName: challenge.symbol)
+                        .font(.system(size: 48))
+                        .foregroundStyle(GuideUTheme.accent)
+                        .frame(width: 68)
+                        .accessibilityHidden(true)
+                    VStack(alignment: .leading, spacing: 6) {
+                        Text("UNA HISTORIA PARA TI")
+                            .font(.caption.bold())
+                            .foregroundStyle(GuideUTheme.accent)
+                        Text(challenge.title)
+                            .font(.title.bold())
+                            .accessibilityAddTraits(.isHeader)
+                    }
+                    Spacer(minLength: 0)
+                }
+            }
 
             GuideUCard {
                 VStack(alignment: .leading, spacing: 10) {
@@ -154,7 +182,7 @@ struct ChallengeDetailView: View {
                         .frame(maxWidth: .infinity, minHeight: 58, alignment: .leading)
                         .background(
                             RoundedRectangle(cornerRadius: 16)
-                                .fill(GuideUTheme.card)
+                                .fill(Color(uiColor: .secondarySystemGroupedBackground))
                         )
                         .overlay(
                             RoundedRectangle(cornerRadius: 16)
@@ -215,10 +243,7 @@ struct ChallengeDetailView: View {
     private var resultContent: some View {
         VStack(spacing: 24) {
             Spacer(minLength: 32)
-            Image(systemName: "star.circle.fill")
-                .font(.system(size: 88))
-                .foregroundStyle(.yellow)
-                .accessibilityHidden(true)
+            GuideUMascot(size: 108)
             Text("¡Buen trabajo!")
                 .font(.largeTitle.bold())
                 .accessibilityAddTraits(.isHeader)
