@@ -27,8 +27,8 @@ struct OnboardingView: View {
         IntroPage(
             symbol: "puzzlepiece.fill",
             title: "Juguemos juntos",
-            description: "Ordena pasos y relaciona ideas para resolver misiones divertidas.",
-            detail: "Sin reloj ni penalizaciones. Puedes intentarlo de nuevo."
+            description: "Explora un pueblo en 2D, encuentra objetos y descubre nuevas misiones.",
+            detail: "También hay retos y juegos cortos, sin reloj ni penalizaciones."
         ),
         IntroPage(
             symbol: "star.circle.fill",

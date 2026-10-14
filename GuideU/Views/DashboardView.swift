@@ -55,6 +55,38 @@ struct DashboardView: View {
                     }
                 }
 
+                NavigationLink {
+                    WorldAdventureView(progress: progress)
+                } label: {
+                    GuideUHero {
+                        HStack(spacing: 16) {
+                            Image(systemName: "map.fill")
+                                .font(.system(size: 37))
+                                .foregroundStyle(GuideUTheme.mint)
+                                .frame(width: 64, height: 64)
+                                .background(GuideUTheme.mint.opacity(0.10),
+                                            in: RoundedRectangle(cornerRadius: 18))
+                                .accessibilityHidden(true)
+                            VStack(alignment: .leading, spacing: 7) {
+                                Text("EXPLORA UN MUNDO NUEVO")
+                                    .font(.caption.bold())
+                                    .foregroundStyle(GuideUTheme.mint)
+                                Text("Mi pequeño mundo")
+                                    .font(.title2.bold())
+                                    .foregroundStyle(.primary)
+                                Text("Camina, recoge objetos y descubre misiones reales.")
+                                    .font(.subheadline)
+                                    .foregroundStyle(.secondary)
+                                Label("Entrar al pueblo", systemImage: "arrow.right")
+                                    .font(.subheadline.weight(.semibold))
+                                    .foregroundStyle(GuideUTheme.mint)
+                            }
+                            Spacer(minLength: 0)
+                        }
+                    }
+                }
+                .buttonStyle(.plain)
+
                 SectionHeading(
                     title: "Tu próxima aventura",
                     subtitle: "Dos formas de aprender, sin prisa."

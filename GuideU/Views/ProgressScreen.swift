@@ -87,17 +87,42 @@ struct ProgressScreen: View {
                     }
                 }
 
+                GuideUCard {
+                    HStack(spacing: 12) {
+                        Image(systemName: "map.fill")
+                            .font(.title2)
+                            .foregroundStyle(GuideUTheme.mint)
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text("Mi pequeño mundo")
+                                .font(.headline)
+                            Text("\(progress.completedWorldCount) de \(progress.worldMissionCount) misiones")
+                                .font(.subheadline)
+                                .foregroundStyle(.secondary)
+                        }
+                        Spacer()
+                    }
+                }
+
                 SectionHeading(
                     title: "Lo que ya descubriste",
                     subtitle: "Puedes volver a cualquier actividad completada."
                 )
 
-                if finishedChallenges.isEmpty && finishedGames.isEmpty {
+                if finishedChallenges.isEmpty && finishedGames.isEmpty && progress.completedWorldCount == 0 {
                     GuideUCard {
                         Label("Tu primera estrella te espera en Retos o Juegos.",
                               systemImage: "sparkles")
                             .font(.body)
                     }
+                }
+
+                ForEach(WorldMission.allCases.filter { progress.isWorldCompleted($0) }) { mission in
+                    NavigationLink {
+                        WorldAdventureView(progress: progress)
+                    } label: {
+                        completedRow(title: mission.title, symbol: mission.symbol, kind: "Mundo")
+                    }
+                    .buttonStyle(.plain)
                 }
 
                 ForEach(finishedGames) { game in

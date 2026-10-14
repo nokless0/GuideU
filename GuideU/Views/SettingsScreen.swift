@@ -60,12 +60,12 @@ struct SettingsScreen: View {
                     }
                     Button("Cancelar", role: .cancel) {}
                 } message: {
-                    Text("Los retos y juegos seguirán disponibles. Esta acción no se puede deshacer.")
+                    Text("Se borrarán las estrellas, las misiones del pueblo y los objetos encontrados. Esta acción no se puede deshacer.")
                 }
             }
 
             Section("Acerca de GuideU") {
-                LabeledContent("Versión", value: "2.0")
+                LabeledContent("Versión", value: "3.0 — Mi pequeño mundo")
                 Text("Lumi te acompaña a explorar situaciones cotidianas. Puedes practicar sin competir ni sentir presión.")
                 Text("Prototipo educativo; no reemplaza el acompañamiento de familiares o profesionales.")
                 Text("El progreso se guarda únicamente en este dispositivo. No necesitas cuenta ni conexión a internet.")

@@ -28,6 +28,40 @@ struct GamesHubView: View {
                     }
                 }
 
+                NavigationLink {
+                    WorldAdventureView(progress: progress)
+                } label: {
+                    GuideUHero {
+                        HStack(spacing: 15) {
+                            Image(systemName: "map.fill")
+                                .font(.system(size: 37))
+                                .foregroundStyle(GuideUTheme.mint)
+                                .frame(width: 63, height: 63)
+                                .background(GuideUTheme.mint.opacity(0.12),
+                                            in: RoundedRectangle(cornerRadius: 17))
+                                .accessibilityHidden(true)
+                            VStack(alignment: .leading, spacing: 7) {
+                                Text("NUEVA AVENTURA 2D")
+                                    .font(.caption.bold())
+                                    .foregroundStyle(GuideUTheme.mint)
+                                Text("Mi pequeño mundo")
+                                    .font(.title2.bold())
+                                    .foregroundStyle(.primary)
+                                Text("Camina por un pueblo, encuentra objetos y cumple misiones.")
+                                    .font(.subheadline)
+                                    .foregroundStyle(.secondary)
+                                    .multilineTextAlignment(.leading)
+                                Label("Explorar el pueblo", systemImage: "arrow.right")
+                                    .font(.subheadline.weight(.semibold))
+                                    .foregroundStyle(GuideUTheme.mint)
+                            }
+                            Spacer(minLength: 0)
+                        }
+                    }
+                }
+                .buttonStyle(.plain)
+                .accessibilityHint("Abre el videojuego de exploración")
+
                 Label("\(progress.completedGameCount) de \(progress.gameCount) juegos explorados",
                       systemImage: "star.circle.fill")
                     .font(.headline)
