@@ -5,6 +5,7 @@ GuideU es una aplicación educativa para **iPhone y iPad** desarrollada en **Swi
 ## Novedades de GuideU 4.0
 
 - **Lumi tiene logo propio**: mascota sonriente dibujada directamente con SwiftUI, sin imágenes externas.
+- **Ícono de inicio del iPad**: gráfico original de Lumi incluido en Assets.xcassets/AppIcon.appiconset (1024 × 1024).
 - **Inicio y tarjetas más coloridos**, con degradados suaves que desaparecen al activar el diseño tranquilo.
 - **Nuevo juego de interacción «El cuarto de Lumi»**: arrastra (o toca) seis objetos hasta el escritorio, la caja de juegos o el armario. No es un cuestionario. Se puede reiniciar y repetir sin castigos.
 - **Una estrella nueva** por completar el cuarto por primera vez, integrada con el progreso local existente. Hay **19 estrellas posibles**.
