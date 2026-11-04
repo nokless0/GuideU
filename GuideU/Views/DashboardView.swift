@@ -22,12 +22,9 @@ struct DashboardView: View {
                     VStack(alignment: .leading, spacing: 18) {
                         HStack(alignment: .top, spacing: 16) {
                             VStack(alignment: .leading, spacing: 8) {
-                                Text("UN ESPACIO PARA TI")
-                                    .font(.caption.bold())
-                                    .tracking(1.1)
-                                    .foregroundStyle(GuideUTheme.accent)
+                                GuideULogo(mascotSize: 60)
 
-                                Text("¡Hola! Soy Lumi")
+                                Text("¡Una aventura a tu manera!")
                                     .font(.largeTitle.bold())
                                     .accessibilityAddTraits(.isHeader)
 
@@ -35,7 +32,6 @@ struct DashboardView: View {
                                     .font(.title3)
                             }
                             Spacer(minLength: 2)
-                            GuideUMascot(size: 80)
                         }
 
                         Text("Practica, juega o descansa. Tú eliges el ritmo.")
@@ -80,6 +76,38 @@ struct DashboardView: View {
                                 Label("Entrar al pueblo", systemImage: "arrow.right")
                                     .font(.subheadline.weight(.semibold))
                                     .foregroundStyle(GuideUTheme.mint)
+                            }
+                            Spacer(minLength: 0)
+                        }
+                    }
+                }
+                .buttonStyle(.plain)
+
+                NavigationLink {
+                    RoomTidyGameView(progress: progress)
+                } label: {
+                    GuideUHero {
+                        HStack(spacing: 16) {
+                            Image(systemName: "house.fill")
+                                .font(.system(size: 37))
+                                .foregroundStyle(GuideUTheme.coral)
+                                .frame(width: 64, height: 64)
+                                .background(GuideUTheme.sunny.opacity(0.16),
+                                            in: RoundedRectangle(cornerRadius: 18))
+                                .accessibilityHidden(true)
+                            VStack(alignment: .leading, spacing: 7) {
+                                Text("¡NUEVO JUEGO!")
+                                    .font(.caption.bold())
+                                    .foregroundStyle(GuideUTheme.coral)
+                                Text("El cuarto de Lumi")
+                                    .font(.title2.bold())
+                                    .foregroundStyle(.primary)
+                                Text("Ordena su habitación moviendo los objetos a su lugar.")
+                                    .font(.subheadline)
+                                    .foregroundStyle(.secondary)
+                                Label("Empezar a jugar", systemImage: "arrow.right")
+                                    .font(.subheadline.weight(.semibold))
+                                    .foregroundStyle(GuideUTheme.coral)
                             }
                             Spacer(minLength: 0)
                         }
