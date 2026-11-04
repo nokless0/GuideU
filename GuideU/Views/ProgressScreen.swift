@@ -108,12 +108,23 @@ struct ProgressScreen: View {
                     subtitle: "Puedes volver a cualquier actividad completada."
                 )
 
-                if finishedChallenges.isEmpty && finishedGames.isEmpty && progress.completedWorldCount == 0 {
+                if finishedChallenges.isEmpty && finishedGames.isEmpty
+                    && !progress.roomGameCompleted && progress.completedWorldCount == 0 {
                     GuideUCard {
                         Label("Tu primera estrella te espera en Retos o Juegos.",
                               systemImage: "sparkles")
                             .font(.body)
                     }
+                }
+
+                if progress.roomGameCompleted {
+                    NavigationLink {
+                        RoomTidyGameView(progress: progress)
+                    } label: {
+                        completedRow(title: "El cuarto de Lumi",
+                                     symbol: "house.fill", kind: "Juego")
+                    }
+                    .buttonStyle(.plain)
                 }
 
                 ForEach(WorldMission.allCases.filter { progress.isWorldCompleted($0) }) { mission in

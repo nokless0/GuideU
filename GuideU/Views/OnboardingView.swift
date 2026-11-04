@@ -27,8 +27,8 @@ struct OnboardingView: View {
         IntroPage(
             symbol: "puzzlepiece.fill",
             title: "Juguemos juntos",
-            description: "Explora un pueblo en 2D, encuentra objetos y descubre nuevas misiones.",
-            detail: "También hay retos y juegos cortos, sin reloj ni penalizaciones."
+            description: "Explora un pueblo en 2D o ayuda a Lumi a ordenar su habitación.",
+            detail: "Arrastra objetos, juega sin reloj y descubre cosas a tu ritmo."
         ),
         IntroPage(
             symbol: "star.circle.fill",
@@ -41,9 +41,7 @@ struct OnboardingView: View {
     var body: some View {
         VStack(spacing: 12) {
             HStack {
-                GuideUMascot(size: 34)
-                Text("GuideU")
-                    .font(.title2.bold())
+                GuideULogo(mascotSize: 38)
                 Spacer()
                 Button("Omitir") { onFinish() }
                     .accessibilityHint("Ir directamente al inicio")
@@ -56,12 +54,16 @@ struct OnboardingView: View {
                     ScrollView {
                         VStack(spacing: 22) {
                             Spacer(minLength: 14)
-                            Image(systemName: pages[index].symbol)
-                                .font(.system(size: 72, weight: .medium))
-                                .foregroundStyle(GuideUTheme.accent)
-                                .frame(width: 142, height: 142)
-                                .background(GuideUTheme.accent.opacity(0.10), in: Circle())
-                                .accessibilityHidden(true)
+                            if index == 0 {
+                                GuideUMascot(size: 142)
+                            } else {
+                                Image(systemName: pages[index].symbol)
+                                    .font(.system(size: 72, weight: .medium))
+                                    .foregroundStyle(GuideUTheme.accent)
+                                    .frame(width: 142, height: 142)
+                                    .background(GuideUTheme.accent.opacity(0.10), in: Circle())
+                                    .accessibilityHidden(true)
+                            }
 
                             Text(pages[index].title)
                                 .font(.largeTitle.bold())

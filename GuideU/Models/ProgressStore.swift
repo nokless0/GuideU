@@ -24,8 +24,12 @@ final class ProgressStore: ObservableObject {
     }
 
     var totalCount: Int { ChallengeLibrary.all.count }
-    var completedGameCount: Int { GameLibrary.all.filter { completedGameIDs.contains($0.id) }.count }
-    var gameCount: Int { GameLibrary.all.count }
+    var roomGameCompleted: Bool { completedGameIDs.contains("habitacion-lumi") }
+    var completedGameCount: Int {
+        GameLibrary.all.filter { completedGameIDs.contains($0.id) }.count
+            + (roomGameCompleted ? 1 : 0)
+    }
+    var gameCount: Int { GameLibrary.all.count + 1 }
     var worldMissionCount: Int { WorldMission.allCases.count }
     var completedWorldCount: Int {
         WorldMission.allCases.filter { completedWorldIDs.contains($0.id) }.count
@@ -48,6 +52,13 @@ final class ProgressStore: ObservableObject {
     @discardableResult
     func complete(_ game: MiniGame) -> Bool {
         let added = completedGameIDs.insert(game.id).inserted
+        if added { save() }
+        return added
+    }
+
+    @discardableResult
+    func completeRoomGame() -> Bool {
+        let added = completedGameIDs.insert("habitacion-lumi").inserted
         if added { save() }
         return added
     }

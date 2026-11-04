@@ -62,6 +62,41 @@ struct GamesHubView: View {
                 .buttonStyle(.plain)
                 .accessibilityHint("Abre el videojuego de exploración")
 
+                NavigationLink {
+                    RoomTidyGameView(progress: progress)
+                } label: {
+                    GuideUHero {
+                        HStack(spacing: 15) {
+                            Image(systemName: "house.fill")
+                                .font(.system(size: 36))
+                                .foregroundStyle(GuideUTheme.coral)
+                                .frame(width: 63, height: 63)
+                                .background(GuideUTheme.sunny.opacity(0.17),
+                                            in: RoundedRectangle(cornerRadius: 19))
+                                .accessibilityHidden(true)
+                            VStack(alignment: .leading, spacing: 7) {
+                                Text("NUEVO • JUEGO DE ARRASTRAR")
+                                    .font(.caption.bold())
+                                    .foregroundStyle(GuideUTheme.coral)
+                                Text("El cuarto de Lumi")
+                                    .font(.title2.bold())
+                                    .foregroundStyle(.primary)
+                                Text("Ordena juguetes, útiles y ropa. ¡Tú preparas el espacio!")
+                                    .font(.subheadline)
+                                    .foregroundStyle(.secondary)
+                                    .multilineTextAlignment(.leading)
+                                Label(progress.roomGameCompleted ? "Volver a jugar" : "¡Vamos a ordenar!",
+                                      systemImage: "arrow.right")
+                                    .font(.subheadline.weight(.semibold))
+                                    .foregroundStyle(GuideUTheme.coral)
+                            }
+                            Spacer(minLength: 0)
+                        }
+                    }
+                }
+                .buttonStyle(.plain)
+                .accessibilityHint("Abre el juego de ordenar objetos arrastrando o tocando")
+
                 Label("\(progress.completedGameCount) de \(progress.gameCount) juegos explorados",
                       systemImage: "star.circle.fill")
                     .font(.headline)
@@ -442,5 +477,318 @@ struct GameDetailView: View {
     private func finishGame() {
         earnedStar = progress.complete(game)
         finished = true
+    }
+}
+
+ 
+// MARK: - El cuarto de Lumi
+// Juego de organización de objetos: arrastrar y soltar, o tocar objeto y destino.
+// La puntuación recompensa la exploración; no hay reloj, errores castigados ni compras.
+
+private enum RoomZone: String, CaseIterable, Identifiable {
+    case desk, toys, wardrobe
+
+    var id: String { rawValue }
+
+    var title: String {
+        switch self {
+        case .desk: return "Escritorio"
+        case .toys: return "Caja de juegos"
+        case .wardrobe: return "Armario"
+        }
+    }
+
+    var symbol: String {
+        switch self {
+        case .desk: return "books.vertical.fill"
+        case .toys: return "shippingbox.fill"
+        case .wardrobe: return "door.left.hand.closed"
+        }
+    }
+
+    var color: Color {
+        switch self {
+        case .desk: return GuideUTheme.sky
+        case .toys: return GuideUTheme.coral
+        case .wardrobe: return GuideUTheme.mint
+        }
+    }
+}
+
+private struct RoomObject: Identifiable {
+    let id: String
+    let title: String
+    let symbol: String
+    let zone: RoomZone
+
+    static let all: [RoomObject] = [
+        RoomObject(id: "cuaderno", title: "Cuaderno",
+                   symbol: "book.closed.fill", zone: .desk),
+        RoomObject(id: "lapices", title: "Lápices",
+                   symbol: "pencil.tip.crop.circle", zone: .desk),
+        RoomObject(id: "pelota", title: "Pelota",
+                   symbol: "soccerball", zone: .toys),
+        RoomObject(id: "peluche", title: "Peluche",
+                   symbol: "teddybear.fill", zone: .toys),
+        RoomObject(id: "sueter", title: "Suéter",
+                   symbol: "sweater", zone: .wardrobe),
+        RoomObject(id: "zapatos", title: "Zapatos",
+                   symbol: "shoeprints.fill", zone: .wardrobe)
+    ]
+}
+
+struct RoomTidyGameView: View {
+    @ObservedObject var progress: ProgressStore
+    @AppStorage("GuideU.showTips") private var showTips = true
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.dismiss) private var dismiss
+    @State private var placedIDs: Set<String> = []
+    @State private var selectedID: String?
+    @State private var message = "Toca un objeto y después su lugar, o arrástralo."
+    @State private var finished = false
+    @State private var earnedStar = false
+
+    private let columns = [GridItem(.adaptive(minimum: 155), spacing: 12)]
+    private let zoneColumns = [GridItem(.adaptive(minimum: 210), spacing: 12)]
+
+    var body: some View {
+        GuideUPage {
+            VStack(alignment: .leading, spacing: 18) {
+                GuideUHero {
+                    HStack(spacing: 14) {
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("JUEGO INTERACTIVO")
+                                .font(.caption.bold())
+                                .foregroundStyle(GuideUTheme.coral)
+                            Text("El cuarto de Lumi")
+                                .font(.title.bold())
+                                .accessibilityAddTraits(.isHeader)
+                            Text("¡Ayuda a Lumi a dejar su cuarto listo para otra aventura!")
+                                .foregroundStyle(.secondary)
+                        }
+                        Spacer(minLength: 0)
+                        GuideUMascot(size: 78)
+                    }
+                }
+
+                if finished {
+                    GuideUHero {
+                        VStack(spacing: 16) {
+                            GuideUMascot(size: 105)
+                            Text("¡Lo lograste!")
+                                .font(.largeTitle.bold())
+                            Text(earnedStar
+                                 ? "¡Un cuarto ordenado y una estrella nueva!"
+                                 : "¡Qué bien volver a practicar!")
+                                .font(.title3)
+                                .multilineTextAlignment(.center)
+                            Text("Cada cosa tiene su lugar. Ordenar poquito a poquito también cuenta.")
+                                .foregroundStyle(.secondary)
+                                .multilineTextAlignment(.center)
+                            Button("Jugar de nuevo") { restart() }
+                                .buttonStyle(.borderedProminent)
+                                .tint(GuideUTheme.mint)
+                                .frame(minHeight: 54)
+                            Button("Volver a los juegos") { dismiss() }
+                                .buttonStyle(.bordered)
+                                .frame(minHeight: 48)
+                        }
+                        .frame(maxWidth: .infinity)
+                    }
+                } else {
+                    HStack {
+                        Label("Mi cuarto", systemImage: "house.fill")
+                            .font(.headline)
+                        Spacer()
+                        Text("\(placedIDs.count) / \(RoomObject.all.count) objetos")
+                            .font(.headline.monospacedDigit())
+                            .foregroundStyle(GuideUTheme.accent)
+                    }
+                    ProgressView(value: Double(placedIDs.count),
+                                 total: Double(RoomObject.all.count))
+                        .tint(GuideUTheme.mint)
+                        .accessibilityLabel("Objetos ordenados")
+                        .accessibilityValue("\(placedIDs.count) de \(RoomObject.all.count)")
+
+                    SectionHeading(
+                        title: "¿Dónde va cada cosa?",
+                        subtitle: "Arrastra los objetos a estos lugares o tócales después de elegir uno."
+                    )
+
+                    LazyVGrid(columns: zoneColumns, spacing: 12) {
+                        ForEach(RoomZone.allCases) { zone in
+                            Button {
+                                placeSelected(in: zone)
+                            } label: {
+                                roomZoneCard(zone)
+                            }
+                            .buttonStyle(.plain)
+                            .dropDestination(for: String.self) { itemIDs, _ in
+                                guard let id = itemIDs.first else { return false }
+                                return place(id, in: zone)
+                            }
+                            .accessibilityLabel("\(zone.title). \(count(in: zone)) objetos guardados")
+                            .accessibilityHint("Toca para guardar aquí el objeto seleccionado, o arrastra un objeto")
+                        }
+                    }
+
+                    GuideUCard {
+                        Label(message, systemImage: "bubble.left.fill")
+                            .font(.body.weight(.medium))
+                            .foregroundStyle(.primary)
+                            .accessibilityAddTraits(.updatesFrequently)
+                    }
+
+                    SectionHeading(
+                        title: "Objetos por ordenar",
+                        subtitle: "Elige un objeto. No hay tiempo límite ni castigos."
+                    )
+                    LazyVGrid(columns: columns, spacing: 12) {
+                        ForEach(RoomObject.all.filter { !placedIDs.contains($0.id) }) { item in
+                            Button {
+                                selectedID = item.id
+                                message = "Elegiste \(item.title.lowercased()). ¿Dónde quieres guardarlo?"
+                            } label: {
+                                VStack(spacing: 12) {
+                                    Image(systemName: item.symbol)
+                                        .font(.system(size: 36, weight: .medium))
+                                        .foregroundStyle(GuideUTheme.accent)
+                                        .frame(height: 46)
+                                        .accessibilityHidden(true)
+                                    Text(item.title)
+                                        .font(.headline)
+                                        .foregroundStyle(.primary)
+                                }
+                                .frame(maxWidth: .infinity, minHeight: 108)
+                                .padding(12)
+                                .background(
+                                    selectedID == item.id
+                                    ? GuideUTheme.sunny.opacity(0.24)
+                                    : GuideUTheme.card,
+                                    in: RoundedRectangle(cornerRadius: 20)
+                                )
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 20)
+                                        .strokeBorder(selectedID == item.id
+                                                      ? GuideUTheme.accent : GuideUTheme.border,
+                                                      lineWidth: selectedID == item.id ? 3 : 1)
+                                )
+                            }
+                            .buttonStyle(.plain)
+                            .draggable(item.id)
+                            .accessibilityLabel("\(item.title). \(selectedID == item.id ? "Seleccionado" : "Sin ordenar")")
+                            .accessibilityHint("Toca y luego elige un lugar de arriba o mantén presionado para arrastrar")
+                        }
+                    }
+
+                    if showTips, let selectedID,
+                       let item = RoomObject.all.first(where: { $0.id == selectedID }) {
+                        Label("Pista: \(item.title) puede ir en \(item.zone.title.lowercased()).",
+                              systemImage: "lightbulb.fill")
+                            .font(.subheadline)
+                            .foregroundStyle(GuideUTheme.mint)
+                    }
+
+                    Button("Volver a empezar este cuarto") { restart() }
+                        .buttonStyle(.bordered)
+                        .frame(minHeight: 44)
+                }
+            }
+        }
+        .navigationTitle("El cuarto de Lumi")
+        .navigationBarTitleDisplayMode(.inline)
+    }
+
+    private func roomZoneCard(_ zone: RoomZone) -> some View {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack(spacing: 12) {
+                Image(systemName: zone.symbol)
+                    .font(.system(size: 30, weight: .medium))
+                    .foregroundStyle(zone.color)
+                    .frame(width: 50, height: 50)
+                    .background(zone.color.opacity(0.13),
+                                in: RoundedRectangle(cornerRadius: 16))
+                    .accessibilityHidden(true)
+                VStack(alignment: .leading, spacing: 3) {
+                    Text(zone.title)
+                        .font(.headline)
+                        .foregroundStyle(.primary)
+                    Text("\(count(in: zone)) de 2 guardados")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+            }
+            Divider()
+            HStack(spacing: 8) {
+                ForEach(RoomObject.all.filter { $0.zone == zone && placedIDs.contains($0.id) }) { item in
+                    Label(item.title, systemImage: item.symbol)
+                        .font(.caption.weight(.semibold))
+                        .foregroundStyle(.primary)
+                        .padding(6)
+                        .background(zone.color.opacity(0.12), in: Capsule())
+                        .lineLimit(1)
+                }
+                if count(in: zone) == 0 {
+                    Text("Aquí puedes guardar cosas")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+                Spacer(minLength: 0)
+            }
+            .frame(minHeight: 32)
+        }
+        .padding(16)
+        .frame(maxWidth: .infinity, minHeight: 144, alignment: .leading)
+        .background(GuideUTheme.card, in: RoundedRectangle(cornerRadius: 22))
+        .overlay(
+            RoundedRectangle(cornerRadius: 22)
+                .strokeBorder(zone.color.opacity(0.55), lineWidth: 2)
+        )
+    }
+
+    private func count(in zone: RoomZone) -> Int {
+        RoomObject.all.filter { $0.zone == zone && placedIDs.contains($0.id) }.count
+    }
+
+    private func placeSelected(in zone: RoomZone) {
+        guard let selectedID else {
+            message = "Elige primero un objeto de abajo."
+            return
+        }
+        _ = place(selectedID, in: zone)
+    }
+
+    @discardableResult
+    private func place(_ itemID: String, in zone: RoomZone) -> Bool {
+        guard let item = RoomObject.all.first(where: { $0.id == itemID }),
+              !placedIDs.contains(itemID) else { return false }
+
+        guard item.zone == zone else {
+            message = "Puedes probar otro lugar para \(item.title.lowercased())."
+            return false
+        }
+
+        if reduceMotion {
+            placedIDs.insert(itemID)
+        } else {
+            withAnimation(.easeInOut(duration: 0.20)) {
+                _ = placedIDs.insert(itemID)
+            }
+        }
+        selectedID = nil
+        message = "¡Bien! \(item.title) ya está en \(zone.title.lowercased())."
+        if placedIDs.count == RoomObject.all.count {
+            earnedStar = progress.completeRoomGame()
+            finished = true
+        }
+        return true
+    }
+
+    private func restart() {
+        placedIDs = []
+        selectedID = nil
+        message = "Toca un objeto y después su lugar, o arrástralo."
+        finished = false
+        earnedStar = false
     }
 }

@@ -4,7 +4,10 @@ import SwiftUI
 enum GuideUTheme {
     static let accent = Color(red: 0.25, green: 0.31, blue: 0.67)
     static let mint = Color(red: 0.15, green: 0.52, blue: 0.45)
-    static let coral = Color(red: 0.73, green: 0.36, blue: 0.34)
+    static let coral = Color(red: 0.76, green: 0.34, blue: 0.35)
+    static let sunny = Color(red: 1.0, green: 0.70, blue: 0.23)
+    static let lilac = Color(red: 0.70, green: 0.53, blue: 0.88)
+    static let sky = Color(red: 0.30, green: 0.61, blue: 0.83)
     static let background = Color(uiColor: .systemGroupedBackground)
     static let card = Color(uiColor: .secondarySystemGroupedBackground)
     static let border = Color(uiColor: .separator).opacity(0.22)
@@ -12,6 +15,7 @@ enum GuideUTheme {
 
 /// Anchura máxima cómoda para leer en iPad sin perder adaptación al iPhone.
 struct GuideUPage<Content: View>: View {
+    @AppStorage("GuideU.quietMode") private var quietMode = false
     let content: Content
     init(@ViewBuilder content: () -> Content) { self.content = content() }
 
@@ -23,7 +27,23 @@ struct GuideUPage<Content: View>: View {
                 .padding(.horizontal, 18)
                 .padding(.vertical, 20)
         }
-        .background(GuideUTheme.background.ignoresSafeArea())
+        .background {
+            ZStack {
+                GuideUTheme.background
+                if !quietMode {
+                    LinearGradient(
+                        colors: [
+                            GuideUTheme.lilac.opacity(0.13),
+                            GuideUTheme.sunny.opacity(0.06),
+                            GuideUTheme.sky.opacity(0.11)
+                        ],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                }
+            }
+            .ignoresSafeArea()
+        }
     }
 }
 
@@ -44,6 +64,8 @@ struct GuideUCard<Content: View>: View {
                 RoundedRectangle(cornerRadius: 24, style: .continuous)
                     .strokeBorder(GuideUTheme.border, lineWidth: 1)
             )
+            .shadow(color: quietMode ? .clear : GuideUTheme.accent.opacity(0.06),
+                    radius: 12, y: 5)
     }
 }
 
@@ -58,9 +80,21 @@ struct GuideUHero<Content: View>: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .background {
                 RoundedRectangle(cornerRadius: 28, style: .continuous)
-                    .fill(quietMode
-                          ? Color(uiColor: .secondarySystemGroupedBackground)
-                          : Color(uiColor: .secondarySystemGroupedBackground))
+                    .fill(Color(uiColor: .secondarySystemGroupedBackground))
+                    .overlay {
+                        if !quietMode {
+                            RoundedRectangle(cornerRadius: 28, style: .continuous)
+                                .fill(
+                                    LinearGradient(
+                                        colors: [GuideUTheme.lilac.opacity(0.16),
+                                                 GuideUTheme.sky.opacity(0.07),
+                                                 GuideUTheme.sunny.opacity(0.10)],
+                                        startPoint: .topLeading,
+                                        endPoint: .bottomTrailing
+                                    )
+                                )
+                        }
+                    }
                     .overlay(alignment: .topTrailing) {
                         if !quietMode {
                             Circle()
@@ -80,19 +114,64 @@ struct GuideUHero<Content: View>: View {
     }
 }
 
+/// Logo y mascota dibujados en SwiftUI, sin imágenes externas ni recursos remotos.
 struct GuideUMascot: View {
     var size: CGFloat = 72
 
     var body: some View {
         ZStack {
             Circle()
-                .fill(GuideUTheme.accent.opacity(0.12))
-            Image(systemName: "sparkles")
-                .font(.system(size: size * 0.46, weight: .semibold))
-                .foregroundStyle(GuideUTheme.accent)
+                .fill(GuideUTheme.lilac.opacity(0.21))
+            Circle()
+                .fill(GuideUTheme.sunny.opacity(0.25))
+                .frame(width: size * 0.79, height: size * 0.79)
+            Image(systemName: "star.fill")
+                .font(.system(size: size * 0.66))
+                .foregroundStyle(
+                    LinearGradient(colors: [GuideUTheme.sunny, .orange],
+                                   startPoint: .top, endPoint: .bottom)
+                )
+                .shadow(color: GuideUTheme.sunny.opacity(0.30), radius: 3, y: 2)
+
+            HStack(spacing: size * 0.10) {
+                Circle().frame(width: size * 0.055, height: size * 0.055)
+                Circle().frame(width: size * 0.055, height: size * 0.055)
+            }
+            .foregroundStyle(Color(red: 0.27, green: 0.20, blue: 0.34))
+            .offset(y: -size * 0.032)
+
+            Path { path in
+                path.move(to: CGPoint(x: size * 0.43, y: size * 0.54))
+                path.addQuadCurve(to: CGPoint(x: size * 0.57, y: size * 0.54),
+                                  control: CGPoint(x: size * 0.50, y: size * 0.65))
+            }
+            .stroke(Color(red: 0.27, green: 0.20, blue: 0.34),
+                    style: StrokeStyle(lineWidth: max(1.5, size * 0.025),
+                                       lineCap: .round))
         }
         .frame(width: size, height: size)
-        .accessibilityLabel("Lumi, la estrella que acompaña GuideU")
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("Lumi, la estrella sonriente de GuideU")
+    }
+}
+
+struct GuideULogo: View {
+    var mascotSize: CGFloat = 58
+
+    var body: some View {
+        HStack(spacing: 12) {
+            GuideUMascot(size: mascotSize)
+            VStack(alignment: .leading, spacing: 2) {
+                Text("GuideU")
+                    .font(.system(.title2, design: .rounded, weight: .heavy))
+                    .foregroundStyle(GuideUTheme.accent)
+                Text("¡Un mundo a tu ritmo!")
+                    .font(.caption.weight(.semibold))
+                    .foregroundStyle(.secondary)
+            }
+        }
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("GuideU. ¡Un mundo a tu ritmo!")
     }
 }
 

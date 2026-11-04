@@ -1,8 +1,16 @@
-# GuideU 3.0 — Mi pequeño mundo
+# GuideU 4.0 — Un mundo a tu ritmo
 
 GuideU es una aplicación educativa para **iPhone y iPad** desarrollada en **SwiftUI**. Combina historias, actividades guiadas y ahora una **aventura 2D hecha con SpriteKit**, sin anuncios ni conexión a internet. Está dirigida principalmente a niños y adolescentes de aproximadamente 10 a 15 años, incluyendo a personas autistas.
 
-## Novedad: Mi pequeño mundo
+## Novedades de GuideU 4.0
+
+- **Lumi tiene logo propio**: mascota sonriente dibujada directamente con SwiftUI, sin imágenes externas.
+- **Inicio y tarjetas más coloridos**, con degradados suaves que desaparecen al activar el diseño tranquilo.
+- **Nuevo juego de interacción «El cuarto de Lumi»**: arrastra (o toca) seis objetos hasta el escritorio, la caja de juegos o el armario. No es un cuestionario. Se puede reiniciar y repetir sin castigos.
+- **Una estrella nueva** por completar el cuarto por primera vez, integrada con el progreso local existente. Hay **19 estrellas posibles**.
+- El mundo SpriteKit, las 3 misiones, 9 retos y los 6 juegos anteriores se conservan.
+
+## Aventura: Mi pequeño mundo
 
 **Mi pequeño mundo** es un pequeño pueblo ilustrado mediante figuras de SpriteKit. Puedes:
 
@@ -23,8 +31,8 @@ En la pestaña **Juegos → Mi pequeño mundo**, o desde la tarjeta destacada de
 
 - Introducción de cuatro pantallas.
 - **9 retos sociales** con distintas respuestas posibles para escuela, familia y comunidad.
-- **6 minijuegos guiados** de secuencias y relaciones.
-- **3 misiones del mundo**, para un total de **18 estrellas posibles**, una por actividad diferente.
+- **6 minijuegos guiados** de secuencias y relaciones, más **El cuarto de Lumi** (arrastrar y ordenar).
+- **3 misiones del mundo**, para un total de **19 estrellas posibles**, una por actividad diferente.
 - Progreso y preferencias guardados localmente sin cuentas ni servidores.
 - Tamaño de texto ampliado, diseño tranquilo, pistas opcionales, VoiceOver en controles SwiftUI, botones grandes y actividades sin límite de tiempo.
 - No se exige contacto visual, abrazos ni hablar para completar las historias.
@@ -49,7 +57,8 @@ En la pestaña **Juegos → Mi pequeño mundo**, o desde la tarjeta destacada de
 5. Camina por el parque y encuentra las tres hojas brillantes.
 6. Comprueba las tres estrellas en Logros y cierra/abre la aplicación: el avance debe persistir.
 7. Reinicia el mundo desde su pantalla y verifica que solo se borran los hallazgos de esa aventura.
-8. Comprueba el diseño en iPhone e iPad; usa VoiceOver para probar los controles de movimiento.
+8. Prueba Juegos → El cuarto de Lumi: arrastra un cuaderno al escritorio; toca una pelota y luego la caja de juegos; termina con los seis objetos, recibe una estrella y repite la partida.
+9. Comprueba el diseño en iPhone e iPad; usa VoiceOver para probar los controles de movimiento.
 
 ## Archivos relevantes
 
@@ -65,7 +74,7 @@ GuideU/
   Design/
     GuideUTheme.swift
   Views/
-    GamesView.swift
+    GamesView.swift         # Incluye El cuarto de Lumi
     DashboardView.swift
     ChallengesView.swift
     OnboardingView.swift
